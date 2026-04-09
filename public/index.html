@@ -370,12 +370,15 @@ function renderSeason() {
   const hsec=document.getElementById("historySection");
   if (!state.days.length){hsec.innerHTML="";return;}
   hsec.innerHTML=`<div class="section-label" style="margin-bottom:12px">Game Day History</div>`+
-    [...state.days].reverse().map(day=>{
-      const wallFlag=day.games?.some(g=>g.isWallGame)?" · 🧱 wall":"";
+    [...state.days].reverse().map((day,di)=>{
+      const wallCount=day.games?.filter(g=>g.isWallGame).length||0;
+      const gameCount=day.games?.length||0;
+      const wallFlag=wallCount>0?` · 🧱 ${wallCount} wall${wallCount!==1?"s":""}` :"";
+      const uid=`day-${di}`;
       return `<div class="history-card">
-        <div class="history-header">
+        <div class="history-header" onclick="toggleDay('${uid}')" style="cursor:pointer">
           <span class="history-date">📅 ${day.date}</span>
-          <span class="history-sub">${day.games?.length||0} game${(day.games?.length||0)!==1?"s":""}${wallFlag}</span>
+          <span class="history-sub">${gameCount} game${gameCount!==1?"s":""}${wallFlag} <span id="arrow-${uid}" style="margin-left:6px">▼</span></span>
         </div>
         <div class="history-grid">
           ${PLAYERS.map(p=>{
@@ -383,8 +386,36 @@ function renderSeason() {
             return `<div class="history-item"><span style="color:${PASTEL[p].text};font-weight:bold">${p}</span><span style="color:${t>0?PASTEL[p].accent:"#c0a0b0"};font-weight:bold">${t>0?"+":""}${t}</span></div>`;
           }).join("")}
         </div>
+        <div id="${uid}" style="display:none;border-top:1px solid #f0dded;padding:12px 16px">
+          ${(day.games||[]).map((game,gi)=>`
+            <div style="margin-bottom:${gi<day.games.length-1?'14px':'0'}">
+              <div style="font-size:11px;font-weight:bold;color:#c05080;letter-spacing:2px;margin-bottom:8px">
+                GAME ${gi+1}${game.isWallGame?' 🧱 WALL GAME':''}
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+                ${PLAYERS.map(p=>{
+                  const pts=parseInt(game[p]?.points)||0;
+                  const hand=game[p]?.hand?.trim();
+                  return `<div style="background:${PASTEL[p].bg};border-radius:8px;padding:6px 10px">
+                    <div style="font-weight:bold;font-size:12px;color:${PASTEL[p].text}">${EMOJI[p]} ${p}</div>
+                    <div style="font-size:14px;font-weight:bold;color:${pts>0?PASTEL[p].accent:'#c0a0b0'}">${pts>0?'+':''}${pts}</div>
+                    ${hand?`<div style="font-size:11px;font-style:italic;color:${PASTEL[p].accent}">${hand}</div>`:''}
+                  </div>`;
+                }).join('')}
+              </div>
+            </div>`).join('')}
+        </div>
       </div>`;
     }).join("");
+}
+
+function toggleDay(uid) {
+  const el=document.getElementById(uid);
+  const arrow=document.getElementById('arrow-'+uid);
+  if (!el) return;
+  const open=el.style.display==='none';
+  el.style.display=open?'block':'none';
+  arrow.textContent=open?'▲':'▼';
 }
 
 async function clearSeason() {
