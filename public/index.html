@@ -178,7 +178,10 @@
       <div class="season-title">🏆 Season Standings <span class="season-badge" id="seasonBadge">2026</span></div>
       <div class="season-sub" id="seasonSub"></div>
     </div>
-    <button class="clear-btn" onclick="clearSeason()">🗑 Clear Season</button>
+    <div style="display:flex;gap:8px">
+      <button class="clear-btn" onclick="exportData()">💾 Backup</button>
+      <button class="clear-btn" onclick="clearSeason()">🗑 Clear Season</button>
+    </div>
   </div>
   <div class="leaderboard">
     <div class="section-label">Total Points Ranking</div>
@@ -557,6 +560,16 @@ function toggleDay(uid){
   const el=document.getElementById(uid),arrow=document.getElementById('arrow-'+uid);
   if(!el)return; const open=el.style.display==='none';
   el.style.display=open?'block':'none'; arrow.textContent=open?'▲':'▼';
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `mahjong-backup-${today()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 async function clearSeason(){
