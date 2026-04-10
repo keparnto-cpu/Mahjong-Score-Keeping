@@ -509,9 +509,10 @@ function renderSeason(){
       return `<div class="history-card">
         <div class="history-header" onclick="toggleDay('${uid}')">
           <span class="history-date">📅 ${day.date}</span>
-          <div style="display:flex;align-items:center;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px">
             <span class="history-sub">${gameCount} game${gameCount!==1?"s":""}${wallFlag}${absentFlag} <span id="arrow-${uid}">▼</span></span>
             <button onclick="event.stopPropagation();editDay(${[...seasonData().days].reverse().indexOf(day)})" style="background:none;border:1px solid #e0b0c8;border-radius:8px;color:#c05080;font-size:11px;padding:3px 10px;cursor:pointer;font-family:inherit">✏️ Edit</button>
+            <button onclick="event.stopPropagation();deleteDay(${[...seasonData().days].reverse().indexOf(day)},'${day.date}')" style="background:none;border:1px solid #f0b0b0;border-radius:8px;color:#c07070;font-size:11px;padding:3px 10px;cursor:pointer;font-family:inherit">🗑 Delete</button>
           </div>
         </div>
         <div class="history-grid">
@@ -570,6 +571,20 @@ function exportData() {
   a.download = `mahjong-backup-${today()}.json`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+async function deleteDay(reversedIndex, date) {
+  if (!confirm(`Delete game day ${date}? This cannot be undone.`)) return;
+  const days = seasonData().days;
+  const actualIndex = days.length - 1 - reversedIndex;
+  days.splice(actualIndex, 1);
+  try {
+    await apiSave(state);
+    renderSeason();
+    renderLanding();
+  } catch {
+    alert("Delete failed — try again");
+  }
 }
 
 async function clearSeason(){
