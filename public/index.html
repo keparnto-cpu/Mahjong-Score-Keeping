@@ -33,11 +33,19 @@
   .nav-right{display:flex;align-items:center;gap:8px}
   .nav-season{background:#fff;border:1.5px solid #e0b0cc;border-radius:20px;color:#c05080;font-weight:bold;font-size:12px;padding:6px 14px;cursor:pointer;font-family:inherit}
   .nav-tabs{display:flex;gap:8px}
-  .nav-tab{padding:8px 16px;border-radius:20px;border:1.5px solid #ddb0c8;background:transparent;color:#c05080;font-weight:bold;font-size:12px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all .15s}
+  .nav-tab{padding:8px 16px;border-radius:20px;border:1.5px solid #ddb0c8;background:transparent;color:#c05080;font-weight:bold;font-size:12px;cursor:pointer;letter-spacing:1px;text-transform:uppercase}
   .nav-tab.active{border-color:#c05080;background:#f4d0e0;color:#8a1840}
   .page{display:none;max-width:900px;margin:0 auto;padding:24px 16px}
   .page.active{display:block}
-  .date-row{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+
+  /* Absent bar */
+  .absent-bar{background:#fff;border:1.5px solid #f0dded;border-radius:12px;padding:14px 16px;margin-bottom:18px}
+  .absent-bar-title{color:#b080a0;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+  .absent-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .absent-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;border:1.5px solid;cursor:pointer;font-size:13px;font-weight:bold;transition:all .15s;user-select:none}
+  .absent-chip.absent{opacity:0.5;text-decoration:line-through}
+
+  .date-row{display:flex;align-items:center;gap:12px;margin-bottom:18px}
   .date-label{color:#b080a0;font-size:11px;letter-spacing:2px;text-transform:uppercase}
   input[type=date]{background:#fff;border:1.5px solid #e0c0d0;border-radius:8px;color:#7a3050;padding:7px 12px;font-size:15px}
   .game-card{background:#fff;border:1.5px solid #f0dded;border-radius:14px;margin-bottom:18px;overflow:hidden;box-shadow:0 2px 12px #e8c8d818}
@@ -53,9 +61,13 @@
   .wall-banner{background:#fff8e8;border-bottom:1px dashed #e8d0a0;padding:8px 16px;font-size:12px;color:#9a7030;display:flex;align-items:center;gap:6px}
   .remove-btn{background:none;border:none;color:#e08080;font-size:18px;cursor:pointer}
   .players-grid{padding:14px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
-  .player-card{border-radius:10px;padding:10px 10px 12px;border:1.5px solid}
-  .player-name-row{display:flex;align-items:center;gap:6px;margin-bottom:8px}
-  .player-name{font-weight:bold;font-size:13px}
+  .player-card{border-radius:10px;padding:10px 10px 12px;border:1.5px solid;transition:opacity .2s}
+  .player-card.out{opacity:0.35;pointer-events:none}
+  .player-card.sitting-out{opacity:0.5}
+  .player-name-row{display:flex;align-items:center;gap:4px;margin-bottom:8px}
+  .player-name{font-weight:bold;font-size:12px;flex:1}
+  .sit-out-btn{font-size:10px;border:none;border-radius:10px;padding:2px 6px;cursor:pointer;background:#f0e0e8;color:#c06080;font-family:inherit;white-space:nowrap}
+  .sit-out-btn.active{background:#e08080;color:#fff}
   .player-input{width:100%;background:#fff;border:1px solid #e8d0dc;border-radius:6px;color:#3a2a1a;padding:6px 8px;font-size:14px;margin-bottom:7px}
   .hand-input{width:100%;background:#fff;border:1px solid #e8d0dc;border-radius:6px;padding:6px 8px;font-size:12px;font-style:italic}
   .add-game-btn{background:none;border:1.5px dashed #d0a0bc;border-radius:10px;color:#c06890;padding:11px 24px;font-size:14px;margin-bottom:24px;width:100%}
@@ -70,7 +82,7 @@
   .season-title{color:#c05080;font-size:20px;font-weight:bold;letter-spacing:1px}
   .season-sub{color:#b090a8;font-size:12px;margin-top:4px}
   .clear-btn{background:none;border:1px solid #e0a0a0;color:#c07070;border-radius:8px;padding:6px 14px;font-size:12px}
-  .leaderboard{background:#fff;border:1.5px solid #f0dded;border-radius:14px;padding:18px 20px;margin-bottom:24px;box-shadow:0 2px 12px #f0d0e015}
+  .leaderboard{background:#fff;border:1.5px solid #f0dded;border-radius:14px;padding:18px 20px;margin-bottom:24px}
   .section-label{color:#b080a0;font-size:11px;letter-spacing:2px;margin-bottom:14px;text-transform:uppercase}
   .lb-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
   .lb-rank{width:28px;font-size:16px;text-align:center}
@@ -108,14 +120,11 @@
     <h1 style="font-size:34px;color:#c05080;margin-bottom:4px;letter-spacing:1px">Mahjong Day</h1>
     <div style="font-size:11px;color:#b080a0;letter-spacing:4px;text-transform:uppercase;margin-bottom:24px">Score Keeper & Season Tracker</div>
     <div class="emoji-row" id="avatarRow"></div>
-
-    <!-- Season Switcher -->
     <div style="margin-bottom:8px;color:#b080a0;font-size:11px;letter-spacing:2px;text-transform:uppercase">Select Season</div>
     <div class="season-switcher">
       <button class="season-btn" id="btn-2025" onclick="selectSeason('2025')">🀄 Season 2025</button>
       <button class="season-btn" id="btn-2026" onclick="selectSeason('2026')">🀄 Season 2026</button>
     </div>
-
     <div class="stat-box" id="statBox">Loading…</div>
     <div style="display:flex;flex-direction:column">
       <button class="btn-primary" onclick="goTo('today')">🎴 Score Today's Games</button>
@@ -146,6 +155,13 @@
     <span class="date-label">Game Date</span>
     <input type="date" id="gameDate"/>
   </div>
+
+  <!-- Absent for the day -->
+  <div class="absent-bar">
+    <div class="absent-bar-title">Absent Today</div>
+    <div class="absent-chips" id="absentChips"></div>
+  </div>
+
   <div id="gamesContainer"></div>
   <button class="add-game-btn" onclick="addGame()">+ Add Another Game</button>
   <div class="totals-box">
@@ -190,68 +206,81 @@ const PASTEL  = {
 };
 
 let currentSeason = "2026";
-let state = { "2025": { days:[] }, "2026": { days:[] } };
+let state = {"2025":{days:[]},"2026":{days:[]}};
 let currentDay = newDay();
 
-function newDay()  { return { date: today(), games: [newGame()] }; }
-function newGame() { const g={isWallGame:false}; PLAYERS.forEach(p=>g[p]={points:"",hand:""}); return g; }
-function today()   { return new Date().toISOString().split("T")[0]; }
-function seasonData() { return state[currentSeason] || { days:[] }; }
+function newDay() {
+  return { date: today(), absentPlayers: [], games: [newGame()] };
+}
+function newGame() {
+  const g={isWallGame:false,sittingOut:[]};
+  PLAYERS.forEach(p=>g[p]={points:"",hand:""});
+  return g;
+}
+function today() { return new Date().toISOString().split("T")[0]; }
+function seasonData() { return state[currentSeason]||{days:[]}; }
 
-// ── API ────────────────────────────────────────────────────────────────────
+// ── API ─────────────────────────────────────────────────────────────────────
 async function apiLoad() {
-  const r = await fetch(`${API_BASE}/api/scores`);
-  if (!r.ok) throw new Error("Load failed");
+  const r=await fetch(`${API_BASE}/api/scores`);
+  if(!r.ok) throw new Error("Load failed");
   return r.json();
 }
 async function apiSave(data) {
-  const r = await fetch(`${API_BASE}/api/scores`, {
-    method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)
-  });
-  if (!r.ok) throw new Error("Save failed");
+  const r=await fetch(`${API_BASE}/api/scores`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+  if(!r.ok) throw new Error("Save failed");
 }
 
-function showSync(page, type, msg, spinner=false) {
+function showSync(page,type,msg,spinner=false) {
   const el=document.getElementById("syncBar"+page[0].toUpperCase()+page.slice(1));
   if(!el)return; el.style.display="flex"; el.className=`sync-bar ${type}`;
   el.innerHTML=(spinner?`<span class="spinner"></span>`:"")+`<span>${msg}</span>`;
 }
 function hideSync(page) {
   const el=document.getElementById("syncBar"+page[0].toUpperCase()+page.slice(1));
-  if(el)el.style.display="none";
+  if(el) el.style.display="none";
 }
 
 async function syncLoad(page) {
   showSync(page,"info","Syncing with cloud…",true);
-  try { const data=await apiLoad(); if(data&&data["2025"]!==undefined){state=data;}else if(data&&data.days){state={"2025":{days:[]},"2026":data};} hideSync(page); }
-  catch { showSync(page,"error","⚠️ Could not reach server"); }
+  try {
+    const data=await apiLoad();
+    if(data&&data["2025"]!==undefined){state=data;if(!state["2025"])state["2025"]={days:[]};if(!state["2026"])state["2026"]={days:[]};}
+    else if(data&&data.days){state={"2025":{days:[]},"2026":{days:data.days}};apiSave(state).catch(()=>{});}
+    hideSync(page);
+  } catch { showSync(page,"error","⚠️ Could not reach server"); }
 }
 
-// ── Season Select ──────────────────────────────────────────────────────────
+// ── Season Select ───────────────────────────────────────────────────────────
 function selectSeason(year) {
-  currentSeason = year;
-  document.getElementById("btn-2025").classList.toggle("active", year==="2025");
-  document.getElementById("btn-2026").classList.toggle("active", year==="2026");
-  document.getElementById("navSeasonBtn").textContent = `Season ${year}`;
-  document.getElementById("seasonBadge").textContent = year;
+  currentSeason=year;
+  document.getElementById("btn-2025").classList.toggle("active",year==="2025");
+  document.getElementById("btn-2026").classList.toggle("active",year==="2026");
+  document.getElementById("navSeasonBtn").textContent=`Season ${year}`;
+  document.getElementById("seasonBadge").textContent=year;
   renderLanding();
 }
 
-// ── Season compute ─────────────────────────────────────────────────────────
+// ── Season compute ──────────────────────────────────────────────────────────
 function computeSeason() {
   const t={}, days=seasonData().days||[];
   PLAYERS.forEach(p=>t[p]={points:0,hands:{},wins:0});
-  days.forEach(day=>(day.games||[]).forEach(game=>{
-    PLAYERS.forEach(p=>{
-      const pts=parseInt(game[p]?.points)||0, hand=game[p]?.hand?.trim();
-      t[p].points+=pts; if(pts>0)t[p].wins++;
-      if(hand)t[p].hands[hand]=(t[p].hands[hand]||0)+1;
+  days.forEach(day=>{
+    const absent=day.absentPlayers||[];
+    (day.games||[]).forEach(game=>{
+      const sittingOut=game.sittingOut||[];
+      PLAYERS.forEach(p=>{
+        if(absent.includes(p)||sittingOut.includes(p)) return;
+        const pts=parseInt(game[p]?.points)||0, hand=game[p]?.hand?.trim();
+        t[p].points+=pts; if(pts>0)t[p].wins++;
+        if(hand)t[p].hands[hand]=(t[p].hands[hand]||0)+1;
+      });
     });
-  }));
+  });
   return t;
 }
 
-// ── Navigation ─────────────────────────────────────────────────────────────
+// ── Navigation ──────────────────────────────────────────────────────────────
 function goTo(view) {
   document.getElementById("landing").style.display=view==="landing"?"flex":"none";
   document.getElementById("navbar").style.display=view==="landing"?"none":"block";
@@ -266,30 +295,62 @@ function goTo(view) {
   if(view==="landing") renderLanding();
 }
 
-// ── Landing ────────────────────────────────────────────────────────────────
+// ── Landing ─────────────────────────────────────────────────────────────────
 function renderLanding() {
   document.getElementById("avatarRow").innerHTML=PLAYERS.map(p=>`
     <div class="avatar" title="${p}" style="background:${PASTEL[p].bg};border-color:${PASTEL[p].accent};box-shadow:0 3px 10px ${PASTEL[p].accent}40">${EMOJI[p]}</div>`).join("");
   const days=seasonData().days||[];
   const total=days.reduce((s,d)=>s+(d.games?.length||0),0);
   document.getElementById("statBox").textContent=
-    days.length===0
-      ? `Season ${currentSeason} — no games yet! 🎉`
-      : `Season ${currentSeason} · ${days.length} game day${days.length!==1?"s":""} · ${total} game${total!==1?"s":""} played`;
+    days.length===0?`Season ${currentSeason} — no games yet! 🎉`
+    :`Season ${currentSeason} · ${days.length} game day${days.length!==1?"s":""} · ${total} game${total!==1?"s":""} played`;
   document.getElementById("btn-2025").classList.toggle("active",currentSeason==="2025");
   document.getElementById("btn-2026").classList.toggle("active",currentSeason==="2026");
 }
 
-// ── Today ──────────────────────────────────────────────────────────────────
+// ── Today ───────────────────────────────────────────────────────────────────
 function renderToday() {
   document.getElementById("gameDate").value=currentDay.date;
   document.getElementById("gameDate").onchange=e=>{currentDay.date=e.target.value;updateTotals();};
-  renderGames(); updateTotals();
+  renderAbsentChips();
+  renderGames();
+  updateTotals();
+}
+
+function renderAbsentChips() {
+  const absent=currentDay.absentPlayers||[];
+  document.getElementById("absentChips").innerHTML=PLAYERS.map(p=>`
+    <div class="absent-chip ${absent.includes(p)?"absent":""}"
+      style="background:${absent.includes(p)?"#f0e0e0":PASTEL[p].bg};border-color:${PASTEL[p].accent}55;color:${PASTEL[p].text}"
+      onclick="toggleAbsent('${p}')">
+      ${EMOJI[p]} ${p} ${absent.includes(p)?"✕":""}
+    </div>`).join("");
+}
+
+function toggleAbsent(p) {
+  const absent=currentDay.absentPlayers||[];
+  const idx=absent.indexOf(p);
+  if(idx===-1) absent.push(p); else absent.splice(idx,1);
+  currentDay.absentPlayers=absent;
+  renderAbsentChips();
+  renderGames();
+  updateTotals();
+}
+
+function toggleSittingOut(gi, p) {
+  const so=currentDay.games[gi].sittingOut||[];
+  const idx=so.indexOf(p);
+  if(idx===-1) so.push(p); else so.splice(idx,1);
+  currentDay.games[gi].sittingOut=so;
+  renderGames();
+  updateTotals();
 }
 
 function renderGames() {
-  document.getElementById("gamesContainer").innerHTML=currentDay.games.map((game,gi)=>`
-    <div class="game-card">
+  const absent=currentDay.absentPlayers||[];
+  document.getElementById("gamesContainer").innerHTML=currentDay.games.map((game,gi)=>{
+    const so=game.sittingOut||[];
+    return `<div class="game-card">
       <div class="game-header">
         <div class="wall-toggle-row">
           <span class="game-title">GAME ${gi+1}</span>
@@ -302,14 +363,23 @@ function renderGames() {
       </div>
       ${game.isWallGame?`<div class="wall-banner">🧱 Wall game — no winner. Enter any penalties or leave all blank.</div>`:""}
       <div class="players-grid">
-        ${PLAYERS.map(p=>`
-          <div class="player-card" style="background:${PASTEL[p].bg};border-color:${PASTEL[p].accent}55">
-            <div class="player-name-row"><span style="font-size:16px">${EMOJI[p]}</span><span class="player-name" style="color:${PASTEL[p].text}">${p}</span></div>
-            <input class="player-input" type="number" placeholder="Points" value="${game[p]?.points||""}" oninput="updateField(${gi},'${p}','points',this.value)"/>
-            <input class="hand-input" type="text" placeholder="${game.isWallGame?"Penalty / notes":"Winning hand"}" value="${game[p]?.hand||""}" style="color:${PASTEL[p].accent}" oninput="updateField(${gi},'${p}','hand',this.value)"/>
-          </div>`).join("")}
+        ${PLAYERS.map(p=>{
+          const isAbsent=absent.includes(p);
+          const isSitting=so.includes(p);
+          const cardClass=isAbsent?"out":isSitting?"sitting-out":"";
+          return `<div class="player-card ${cardClass}" style="background:${PASTEL[p].bg};border-color:${PASTEL[p].accent}55">
+            <div class="player-name-row">
+              <span style="font-size:15px">${EMOJI[p]}</span>
+              <span class="player-name" style="color:${PASTEL[p].text}">${p}</span>
+              ${!isAbsent?`<button class="sit-out-btn ${isSitting?"active":""}" onclick="toggleSittingOut(${gi},'${p}')">${isSitting?"In":"Out"}</button>`:`<span style="font-size:10px;color:#c0a0a0">absent</span>`}
+            </div>
+            <input class="player-input" type="number" placeholder="Points" value="${game[p]?.points||""}" oninput="updateField(${gi},'${p}','points',this.value)" ${isAbsent||isSitting?"disabled":""}/>
+            <input class="hand-input" type="text" placeholder="${game.isWallGame?"Penalty / notes":"Winning hand"}" value="${game[p]?.hand||""}" style="color:${PASTEL[p].accent}" oninput="updateField(${gi},'${p}','hand',this.value)" ${isAbsent||isSitting?"disabled":""}/>
+          </div>`;
+        }).join("")}
       </div>
-    </div>`).join("");
+    </div>`;
+  }).join("");
 }
 
 function toggleWall(gi){currentDay.games[gi].isWallGame=!currentDay.games[gi].isWallGame;renderGames();updateTotals();}
@@ -317,11 +387,29 @@ function updateField(gi,p,field,val){currentDay.games[gi][p][field]=val;updateTo
 function addGame(){currentDay.games.push(newGame());renderGames();updateTotals();}
 function removeGame(gi){currentDay.games.splice(gi,1);renderGames();updateTotals();}
 
-function getDayTotals(){const t={};PLAYERS.forEach(p=>t[p]=0);currentDay.games.forEach(g=>PLAYERS.forEach(p=>{t[p]+=parseInt(g[p]?.points)||0;}));return t;}
+function getDayTotals(){
+  const t={}, absent=currentDay.absentPlayers||[];
+  PLAYERS.forEach(p=>t[p]=0);
+  currentDay.games.forEach(g=>{
+    const so=g.sittingOut||[];
+    PLAYERS.forEach(p=>{
+      if(absent.includes(p)||so.includes(p)) return;
+      t[p]+=parseInt(g[p]?.points)||0;
+    });
+  });
+  return t;
+}
+
 function updateTotals(){
-  const t=getDayTotals();
+  const t=getDayTotals(), absent=currentDay.absentPlayers||[];
+  // Only show players who played at least one game today
+  const activePlayers=PLAYERS.filter(p=>{
+    if(absent.includes(p)) return false;
+    // Include if they participated in at least one game
+    return currentDay.games.some(g=>!(g.sittingOut||[]).includes(p));
+  });
   document.getElementById("totalsTitle").textContent=`📊 DAY TOTALS — ${currentDay.date} · Season ${currentSeason}`;
-  document.getElementById("totalsGrid").innerHTML=PLAYERS.map(p=>`
+  document.getElementById("totalsGrid").innerHTML=activePlayers.map(p=>`
     <div class="total-item" style="background:${PASTEL[p].bg}">
       <span style="color:${PASTEL[p].text};font-weight:bold;font-size:13px">${p}</span>
       <span style="color:${PASTEL[p].text};font-weight:bold;font-size:16px">${t[p]>0?"+":""}${t[p]}</span>
@@ -345,7 +433,7 @@ async function saveDay(){
   setTimeout(()=>msg.textContent="",3000);
 }
 
-// ── Season ─────────────────────────────────────────────────────────────────
+// ── Season ──────────────────────────────────────────────────────────────────
 function renderSeason(){
   const season=computeSeason(), days=seasonData().days||[];
   const total=days.reduce((s,d)=>s+(d.games?.length||0),0);
@@ -386,36 +474,52 @@ function renderSeason(){
     [...days].reverse().map((day,di)=>{
       const wallCount=day.games?.filter(g=>g.isWallGame).length||0;
       const gameCount=day.games?.length||0;
+      const absentList=day.absentPlayers||[];
       const wallFlag=wallCount>0?` · 🧱 ${wallCount} wall${wallCount!==1?"s":""}` :"";
+      const absentFlag=absentList.length>0?` · 🚫 ${absentList.join(", ")}`:"";
       const uid=`day-${di}`;
       return `<div class="history-card">
         <div class="history-header" onclick="toggleDay('${uid}')">
           <span class="history-date">📅 ${day.date}</span>
-          <span class="history-sub">${gameCount} game${gameCount!==1?"s":""}${wallFlag} <span id="arrow-${uid}">▼</span></span>
+          <span class="history-sub">${gameCount} game${gameCount!==1?"s":""}${wallFlag}${absentFlag} <span id="arrow-${uid}">▼</span></span>
         </div>
         <div class="history-grid">
           ${PLAYERS.map(p=>{
-            const t=(day.games||[]).reduce((s,g)=>s+(parseInt(g[p]?.points)||0),0);
-            return `<div class="history-item"><span style="color:${PASTEL[p].text};font-weight:bold">${p}</span><span style="color:${t>0?PASTEL[p].accent:"#c0a0b0"};font-weight:bold">${t>0?"+":""}${t}</span></div>`;
+            const absent=absentList.includes(p);
+            const t=absent?null:(day.games||[]).reduce((s,g)=>{
+              if((g.sittingOut||[]).includes(p))return s;
+              return s+(parseInt(g[p]?.points)||0);
+            },0);
+            return `<div class="history-item" style="opacity:${absent?0.4:1}">
+              <span style="color:${PASTEL[p].text};font-weight:bold">${p}</span>
+              <span style="color:${absent?"#c0a0a0":t>0?PASTEL[p].accent:"#c0a0b0"};font-weight:bold">${absent?"absent":((t>0?"+":"")+t)}</span>
+            </div>`;
           }).join("")}
         </div>
         <div id="${uid}" style="display:none;border-top:1px solid #f0dded;padding:12px 16px">
-          ${(day.games||[]).map((game,gi)=>`
-            <div style="margin-bottom:${gi<day.games.length-1?'14px':'0'}">
+          ${(day.games||[]).map((game,gi)=>{
+            const so=game.sittingOut||[];
+            return `<div style="margin-bottom:${gi<day.games.length-1?'14px':'0'}">
               <div style="font-size:11px;font-weight:bold;color:#c05080;letter-spacing:2px;margin-bottom:8px">
                 GAME ${gi+1}${game.isWallGame?' 🧱 WALL GAME':''}
               </div>
               <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
                 ${PLAYERS.map(p=>{
-                  const pts=parseInt(game[p]?.points)||0, hand=game[p]?.hand?.trim();
-                  return `<div style="background:${PASTEL[p].bg};border-radius:8px;padding:6px 10px">
+                  const isAbsent=absentList.includes(p);
+                  const isSitting=so.includes(p);
+                  const pts=parseInt(game[p]?.points)||0;
+                  const hand=game[p]?.hand?.trim();
+                  const inactive=isAbsent||isSitting;
+                  return `<div style="background:${PASTEL[p].bg};border-radius:8px;padding:6px 10px;opacity:${inactive?0.4:1}">
                     <div style="font-weight:bold;font-size:12px;color:${PASTEL[p].text}">${EMOJI[p]} ${p}</div>
-                    <div style="font-size:14px;font-weight:bold;color:${pts>0?PASTEL[p].accent:'#c0a0b0'}">${pts>0?'+':''}${pts}</div>
-                    ${hand?`<div style="font-size:11px;font-style:italic;color:${PASTEL[p].accent}">${hand}</div>`:''}
+                    <div style="font-size:13px;color:#b090a8;font-style:italic">${isAbsent?"absent":isSitting?"sitting out":""}</div>
+                    ${!inactive?`<div style="font-size:14px;font-weight:bold;color:${pts>0?PASTEL[p].accent:'#c0a0b0'}">${pts>0?'+':''}${pts}</div>`:''}
+                    ${!inactive&&hand?`<div style="font-size:11px;font-style:italic;color:${PASTEL[p].accent}">${hand}</div>`:''}
                   </div>`;
                 }).join('')}
               </div>
-            </div>`).join('')}
+            </div>`;
+          }).join('')}
         </div>
       </div>`;
     }).join("");
@@ -433,20 +537,17 @@ async function clearSeason(){
   await apiSave(state); renderSeason(); renderLanding();
 }
 
-// ── Init ───────────────────────────────────────────────────────────────────
+// ── Init ────────────────────────────────────────────────────────────────────
 selectSeason("2026");
 renderLanding();
 apiLoad().then(data=>{
-  if(!data) return;
-  if(data["2025"]!==undefined || data["2026"]!==undefined){
-    // Already in new multi-season format
-    state = data;
-    if(!state["2025"]) state["2025"]={days:[]};
-    if(!state["2026"]) state["2026"]={days:[]};
-  } else if(data.days) {
-    // Old format — migrate existing days to 2026
-    state = {"2025":{days:[]},"2026":{days:data.days}};
-    // Save migrated format back to server
+  if(!data)return;
+  if(data["2025"]!==undefined||data["2026"]!==undefined){
+    state=data;
+    if(!state["2025"])state["2025"]={days:[]};
+    if(!state["2026"])state["2026"]={days:[]};
+  } else if(data.days){
+    state={"2025":{days:[]},"2026":{days:data.days}};
     apiSave(state).catch(()=>{});
   }
   renderLanding();
