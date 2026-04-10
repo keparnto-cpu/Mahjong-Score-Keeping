@@ -309,6 +309,14 @@ function renderLanding() {
 function renderToday() {
   document.getElementById("gameDate").value=currentDay.date;
   document.getElementById("gameDate").onchange=e=>{currentDay.date=e.target.value;updateTotals();};
+  // Show editing banner
+  const syncBar=document.getElementById("syncBarToday");
+  if(editingDayIndex!==null){
+    syncBar.style.display="flex"; syncBar.className="sync-bar info";
+    syncBar.innerHTML=`✏️ <span>Editing saved day: <strong>${currentDay.date}</strong> — make changes and click Update Day</span>`;
+  } else { hideSync("today"); }
+  const saveBtn=document.getElementById("saveBtn");
+  if(saveBtn) saveBtn.textContent=editingDayIndex!==null?"💾 Update Day":"💾 Save Day to Season";
   renderAbsentChips();
   renderGames();
   updateTotals();
@@ -413,20 +421,40 @@ function updateTotals(){
     </div>`).join("");
 }
 
+let editingDayIndex = null; // null = new day, number = editing existing
+
+function editDay(reversedIndex) {
+  const days = seasonData().days;
+  const actualIndex = days.length - 1 - reversedIndex;
+  editingDayIndex = actualIndex;
+  currentDay = JSON.parse(JSON.stringify(days[actualIndex]));
+  goTo('today');
+}
+
 async function saveDay(){
   const btn=document.getElementById("saveBtn"),msg=document.getElementById("saveMsg");
   btn.disabled=true;btn.textContent="Saving…";btn.style.background="#dda0b8";
   if(!state[currentSeason])state[currentSeason]={days:[]};
-  state[currentSeason].days.push(JSON.parse(JSON.stringify(currentDay)));
+  const snapshot=JSON.parse(JSON.stringify(currentDay));
+  const isEditing=editingDayIndex!==null;
+  if(isEditing){
+    state[currentSeason].days[editingDayIndex]=snapshot;
+  } else {
+    state[currentSeason].days.push(snapshot);
+  }
   try{
     await apiSave(state);
-    msg.textContent=`☁️ Saved to Season ${currentSeason}! ✓`;msg.style.color="#307050";
+    msg.textContent=isEditing?`☁️ Day updated! ✓`:`☁️ Saved to Season ${currentSeason}! ✓`;
+    msg.style.color="#307050";
+    editingDayIndex=null;
     currentDay=newDay();renderToday();renderLanding();
   }catch{
-    state[currentSeason].days.pop();
+    if(isEditing){state[currentSeason].days[editingDayIndex]=JSON.parse(JSON.stringify(currentDay));}
+    else{state[currentSeason].days.pop();}
     msg.textContent="⚠️ Save failed — try again";msg.style.color="#c04040";
   }
-  btn.disabled=false;btn.style.background="linear-gradient(135deg,#f0a0c0,#d070a0)";btn.textContent="💾 Save Day to Season";
+  btn.disabled=false;btn.style.background="linear-gradient(135deg,#f0a0c0,#d070a0)";
+  btn.textContent=editingDayIndex!==null?"💾 Update Day":"💾 Save Day to Season";
   setTimeout(()=>msg.textContent="",3000);
 }
 
@@ -478,7 +506,10 @@ function renderSeason(){
       return `<div class="history-card">
         <div class="history-header" onclick="toggleDay('${uid}')">
           <span class="history-date">📅 ${day.date}</span>
-          <span class="history-sub">${gameCount} game${gameCount!==1?"s":""}${wallFlag}${absentFlag} <span id="arrow-${uid}">▼</span></span>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="history-sub">${gameCount} game${gameCount!==1?"s":""}${wallFlag}${absentFlag} <span id="arrow-${uid}">▼</span></span>
+            <button onclick="event.stopPropagation();editDay(${[...seasonData().days].reverse().indexOf(day)})" style="background:none;border:1px solid #e0b0c8;border-radius:8px;color:#c05080;font-size:11px;padding:3px 10px;cursor:pointer;font-family:inherit">✏️ Edit</button>
+          </div>
         </div>
         <div class="history-grid">
           ${PLAYERS.map(p=>{
