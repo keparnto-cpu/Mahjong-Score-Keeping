@@ -15,20 +15,25 @@
   .b2{bottom:-100px;left:-80px;width:360px;height:360px;background:#e8d6ff60}
   .b3{top:40%;left:-60px;width:200px;height:200px;background:#d6f0e050}
   .landing-content{position:relative;z-index:1;max-width:460px;width:100%}
-  .emoji-row{display:flex;justify-content:center;gap:10px;margin-bottom:36px;flex-wrap:wrap}
+  .emoji-row{display:flex;justify-content:center;gap:10px;margin-bottom:28px;flex-wrap:wrap}
   .avatar{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;border:2.5px solid}
-  .stat-box{background:#fff;border:1.5px solid #f0dded;border-radius:12px;padding:12px 24px;margin-bottom:36px;display:inline-block;color:#b080a0;font-size:13px}
+  .stat-box{background:#fff;border:1.5px solid #f0dded;border-radius:12px;padding:12px 24px;margin-bottom:24px;display:inline-block;color:#b080a0;font-size:13px}
+  .season-switcher{display:flex;gap:8px;justify-content:center;margin-bottom:28px}
+  .season-btn{padding:10px 24px;border-radius:20px;border:2px solid #e0c0d0;background:transparent;color:#c05080;font-weight:bold;font-size:14px;cursor:pointer;font-family:inherit;transition:all .15s}
+  .season-btn.active{background:linear-gradient(135deg,#f4a0c4,#d060a0);border-color:transparent;color:#fff;box-shadow:0 3px 12px #d07090aa}
   .btn-primary{background:linear-gradient(135deg,#f4a0c4,#d060a0);border:none;border-radius:16px;color:#fff;font-weight:bold;font-size:18px;padding:18px 32px;width:100%;margin-bottom:14px;box-shadow:0 5px 18px #d07090aa;letter-spacing:.5px;transition:transform .15s}
   .btn-primary:hover{transform:translateY(-2px)}
   .btn-secondary{background:linear-gradient(135deg,#ecdeff,#d4b8f8);border:1.5px solid #c0a0e8;border-radius:16px;color:#5a2080;font-weight:bold;font-size:18px;padding:18px 32px;width:100%;box-shadow:0 4px 14px #c0a0e030;letter-spacing:.5px;transition:transform .15s}
   .btn-secondary:hover{transform:translateY(-2px)}
   #navbar{background:linear-gradient(135deg,#ffe0f0,#f9e4ff);border-bottom:2px solid #f0b8d4;padding:0 1rem;display:none}
-  .nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 0 12px}
+  .nav-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 0}
   .nav-logo{background:none;border:none;cursor:pointer;text-align:left}
-  .nav-title{font-size:22px;font-weight:bold;color:#c05080;letter-spacing:1px}
+  .nav-title{font-size:20px;font-weight:bold;color:#c05080;letter-spacing:1px}
   .nav-sub{font-size:10px;color:#b080a0;letter-spacing:3px;text-transform:uppercase}
+  .nav-right{display:flex;align-items:center;gap:8px}
+  .nav-season{background:#fff;border:1.5px solid #e0b0cc;border-radius:20px;color:#c05080;font-weight:bold;font-size:12px;padding:6px 14px;cursor:pointer;font-family:inherit}
   .nav-tabs{display:flex;gap:8px}
-  .nav-tab{padding:8px 16px;border-radius:20px;border:1.5px solid #ddb0c8;background:transparent;color:#c05080;font-weight:bold;font-size:12px;cursor:pointer;letter-spacing:1px;text-transform:uppercase}
+  .nav-tab{padding:8px 16px;border-radius:20px;border:1.5px solid #ddb0c8;background:transparent;color:#c05080;font-weight:bold;font-size:12px;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all .15s}
   .nav-tab.active{border-color:#c05080;background:#f4d0e0;color:#8a1840}
   .page{display:none;max-width:900px;margin:0 auto;padding:24px 16px}
   .page.active{display:block}
@@ -81,7 +86,7 @@
   .hand-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:1px solid}
   .hand-none{font-size:12px;font-style:italic}
   .history-card{background:#fff;border:1.5px solid #f0dded;border-radius:10px;margin-bottom:12px;overflow:hidden}
-  .history-header{background:#fdf0f6;padding:8px 16px;border-bottom:1px solid #f0dded;display:flex;justify-content:space-between}
+  .history-header{background:#fdf0f6;padding:8px 16px;border-bottom:1px solid #f0dded;display:flex;justify-content:space-between;cursor:pointer}
   .history-date{color:#c05080;font-weight:bold;font-size:13px}
   .history-sub{color:#b090a8;font-size:12px}
   .history-grid{padding:10px 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -89,9 +94,9 @@
   .sync-bar{border-radius:8px;padding:8px 14px;margin-bottom:16px;font-size:12px;display:flex;align-items:center;gap:8px}
   .sync-bar.info{background:#f0f8ff;border:1px solid #c0d8f0;color:#4080b0}
   .sync-bar.error{background:#fff0f0;border:1px solid #f0c0c0;color:#c04040}
-  .sync-bar.success{background:#f0fff4;border:1px solid #b0e0c0;color:#307050}
   .spinner{display:inline-block;width:12px;height:12px;border:2px solid #c0d8f0;border-top-color:#4080b0;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
   @keyframes spin{to{transform:rotate(360deg)}}
+  .season-badge{display:inline-block;background:linear-gradient(135deg,#f4a0c4,#d060a0);color:#fff;font-size:11px;font-weight:bold;padding:3px 10px;border-radius:20px;letter-spacing:1px;margin-left:8px;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -99,11 +104,19 @@
 <div id="landing">
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
   <div class="landing-content">
-    <div style="font-size:70px;margin-bottom:6px;filter:drop-shadow(0 4px 8px #c0508030)">🀄</div>
+    <div style="font-size:64px;margin-bottom:6px;filter:drop-shadow(0 4px 8px #c0508030)">🀄</div>
     <h1 style="font-size:34px;color:#c05080;margin-bottom:4px;letter-spacing:1px">Mahjong Day</h1>
-    <div style="font-size:11px;color:#b080a0;letter-spacing:4px;text-transform:uppercase;margin-bottom:36px">Score Keeper & Season Tracker</div>
+    <div style="font-size:11px;color:#b080a0;letter-spacing:4px;text-transform:uppercase;margin-bottom:24px">Score Keeper & Season Tracker</div>
     <div class="emoji-row" id="avatarRow"></div>
-    <div class="stat-box" id="statBox">Loading season data…</div>
+
+    <!-- Season Switcher -->
+    <div style="margin-bottom:8px;color:#b080a0;font-size:11px;letter-spacing:2px;text-transform:uppercase">Select Season</div>
+    <div class="season-switcher">
+      <button class="season-btn" id="btn-2025" onclick="selectSeason('2025')">🀄 Season 2025</button>
+      <button class="season-btn" id="btn-2026" onclick="selectSeason('2026')">🀄 Season 2026</button>
+    </div>
+
+    <div class="stat-box" id="statBox">Loading…</div>
     <div style="display:flex;flex-direction:column">
       <button class="btn-primary" onclick="goTo('today')">🎴 Score Today's Games</button>
       <button class="btn-secondary" onclick="goTo('season')">🏆 Season Totals</button>
@@ -117,9 +130,12 @@
       <div class="nav-title">🀄 Mahjong Day</div>
       <div class="nav-sub">Score Keeper</div>
     </button>
-    <div class="nav-tabs">
-      <button class="nav-tab" id="tab-today" onclick="goTo('today')">🎴 Today</button>
-      <button class="nav-tab" id="tab-season" onclick="goTo('season')">🏆 Season</button>
+    <div class="nav-right">
+      <button class="nav-season" onclick="goTo('landing')" id="navSeasonBtn">Season 2026</button>
+      <div class="nav-tabs">
+        <button class="nav-tab" id="tab-today" onclick="goTo('today')">🎴 Today</button>
+        <button class="nav-tab" id="tab-season" onclick="goTo('season')">🏆 Season</button>
+      </div>
     </div>
   </div>
 </div>
@@ -146,7 +162,7 @@
   <div id="syncBarSeason" class="sync-bar info" style="display:none"></div>
   <div class="season-header">
     <div>
-      <div class="season-title">🏆 Season Standings</div>
+      <div class="season-title">🏆 Season Standings <span class="season-badge" id="seasonBadge">2026</span></div>
       <div class="season-sub" id="seasonSub"></div>
     </div>
     <button class="clear-btn" onclick="clearSeason()">🗑 Clear Season</button>
@@ -161,11 +177,7 @@
 </div>
 
 <script>
-// ── Config — UPDATE THIS after deploying to Railway ────────────────────────
-// Before deploying, leave as empty string. After Railway gives you a URL,
-// update this to e.g. "https://mahjong-day.up.railway.app"
 const API_BASE = "https://mahjong-score-keeping-production-b097.up.railway.app";
-
 const PLAYERS = ["Melissa","Ana","Leigh","Natalie","Angela","Pato"];
 const EMOJI   = {Melissa:"🌸",Ana:"🌷",Leigh:"🍃",Natalie:"🌼",Angela:"💙",Pato:"🍊"};
 const PASTEL  = {
@@ -177,14 +189,16 @@ const PASTEL  = {
   Pato:   {bg:"#ffe0cc",accent:"#e09060",text:"#6a2e00"},
 };
 
-let state = { days: [] };
+let currentSeason = "2026";
+let state = { "2025": { days:[] }, "2026": { days:[] } };
 let currentDay = newDay();
 
 function newDay()  { return { date: today(), games: [newGame()] }; }
 function newGame() { const g={isWallGame:false}; PLAYERS.forEach(p=>g[p]={points:"",hand:""}); return g; }
 function today()   { return new Date().toISOString().split("T")[0]; }
+function seasonData() { return state[currentSeason] || { days:[] }; }
 
-// ── API calls ──────────────────────────────────────────────────────────────
+// ── API ────────────────────────────────────────────────────────────────────
 async function apiLoad() {
   const r = await fetch(`${API_BASE}/api/scores`);
   if (!r.ok) throw new Error("Load failed");
@@ -192,87 +206,89 @@ async function apiLoad() {
 }
 async function apiSave(data) {
   const r = await fetch(`${API_BASE}/api/scores`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
+    method:"PUT", headers:{"Content-Type":"application/json"}, body:JSON.stringify(data)
   });
   if (!r.ok) throw new Error("Save failed");
 }
 
-// ── Sync helpers ───────────────────────────────────────────────────────────
 function showSync(page, type, msg, spinner=false) {
-  const el = document.getElementById("syncBar" + page[0].toUpperCase() + page.slice(1));
-  if (!el) return;
-  el.style.display = "flex";
-  el.className = `sync-bar ${type}`;
-  el.innerHTML = (spinner ? `<span class="spinner"></span>` : "") + `<span>${msg}</span>`;
+  const el=document.getElementById("syncBar"+page[0].toUpperCase()+page.slice(1));
+  if(!el)return; el.style.display="flex"; el.className=`sync-bar ${type}`;
+  el.innerHTML=(spinner?`<span class="spinner"></span>`:"")+`<span>${msg}</span>`;
 }
 function hideSync(page) {
-  const el = document.getElementById("syncBar" + page[0].toUpperCase() + page.slice(1));
-  if (el) el.style.display = "none";
+  const el=document.getElementById("syncBar"+page[0].toUpperCase()+page.slice(1));
+  if(el)el.style.display="none";
 }
 
 async function syncLoad(page) {
-  showSync(page, "info", "Syncing with cloud…", true);
-  try {
-    state = await apiLoad();
-    hideSync(page);
-  } catch {
-    showSync(page, "error", "⚠️ Could not reach server — check your connection");
-  }
+  showSync(page,"info","Syncing with cloud…",true);
+  try { const data=await apiLoad(); if(data&&data["2025"]!==undefined){state=data;}else if(data&&data.days){state={"2025":{days:[]},"2026":data};} hideSync(page); }
+  catch { showSync(page,"error","⚠️ Could not reach server"); }
+}
+
+// ── Season Select ──────────────────────────────────────────────────────────
+function selectSeason(year) {
+  currentSeason = year;
+  document.getElementById("btn-2025").classList.toggle("active", year==="2025");
+  document.getElementById("btn-2026").classList.toggle("active", year==="2026");
+  document.getElementById("navSeasonBtn").textContent = `Season ${year}`;
+  document.getElementById("seasonBadge").textContent = year;
+  renderLanding();
 }
 
 // ── Season compute ─────────────────────────────────────────────────────────
 function computeSeason() {
-  const t={};
+  const t={}, days=seasonData().days||[];
   PLAYERS.forEach(p=>t[p]={points:0,hands:{},wins:0});
-  (state.days||[]).forEach(day=>{
-    (day.games||[]).forEach(game=>{
-      PLAYERS.forEach(p=>{
-        const pts=parseInt(game[p]?.points)||0, hand=game[p]?.hand?.trim();
-        t[p].points+=pts; if(pts>0)t[p].wins++;
-        if(hand) t[p].hands[hand]=(t[p].hands[hand]||0)+1;
-      });
+  days.forEach(day=>(day.games||[]).forEach(game=>{
+    PLAYERS.forEach(p=>{
+      const pts=parseInt(game[p]?.points)||0, hand=game[p]?.hand?.trim();
+      t[p].points+=pts; if(pts>0)t[p].wins++;
+      if(hand)t[p].hands[hand]=(t[p].hands[hand]||0)+1;
     });
-  });
+  }));
   return t;
 }
 
 // ── Navigation ─────────────────────────────────────────────────────────────
 function goTo(view) {
-  document.getElementById("landing").style.display = view==="landing"?"flex":"none";
-  document.getElementById("navbar").style.display  = view==="landing"?"none":"block";
+  document.getElementById("landing").style.display=view==="landing"?"flex":"none";
+  document.getElementById("navbar").style.display=view==="landing"?"none":"block";
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.querySelectorAll(".nav-tab").forEach(t=>t.classList.remove("active"));
-  if (view!=="landing") {
+  if(view!=="landing"){
     document.getElementById("page-"+view).classList.add("active");
     const tab=document.getElementById("tab-"+view); if(tab)tab.classList.add("active");
   }
-  if (view==="today")  { syncLoad("today").then(renderToday); }
-  if (view==="season") { syncLoad("season").then(renderSeason); }
-  if (view==="landing") renderLanding();
+  if(view==="today")  { syncLoad("today").then(renderToday); }
+  if(view==="season") { syncLoad("season").then(renderSeason); }
+  if(view==="landing") renderLanding();
 }
 
 // ── Landing ────────────────────────────────────────────────────────────────
 function renderLanding() {
-  document.getElementById("avatarRow").innerHTML = PLAYERS.map(p=>`
+  document.getElementById("avatarRow").innerHTML=PLAYERS.map(p=>`
     <div class="avatar" title="${p}" style="background:${PASTEL[p].bg};border-color:${PASTEL[p].accent};box-shadow:0 3px 10px ${PASTEL[p].accent}40">${EMOJI[p]}</div>`).join("");
-  const total=(state.days||[]).reduce((s,d)=>s+(d.games?.length||0),0);
-  document.getElementById("statBox").textContent =
-    state.days.length===0
-      ? "No games yet — start your season! 🎉"
-      : `${state.days.length} game day${state.days.length!==1?"s":""} · ${total} game${total!==1?"s":""} played`;
+  const days=seasonData().days||[];
+  const total=days.reduce((s,d)=>s+(d.games?.length||0),0);
+  document.getElementById("statBox").textContent=
+    days.length===0
+      ? `Season ${currentSeason} — no games yet! 🎉`
+      : `Season ${currentSeason} · ${days.length} game day${days.length!==1?"s":""} · ${total} game${total!==1?"s":""} played`;
+  document.getElementById("btn-2025").classList.toggle("active",currentSeason==="2025");
+  document.getElementById("btn-2026").classList.toggle("active",currentSeason==="2026");
 }
 
 // ── Today ──────────────────────────────────────────────────────────────────
 function renderToday() {
-  document.getElementById("gameDate").value = currentDay.date;
-  document.getElementById("gameDate").onchange = e=>{ currentDay.date=e.target.value; updateTotals(); };
+  document.getElementById("gameDate").value=currentDay.date;
+  document.getElementById("gameDate").onchange=e=>{currentDay.date=e.target.value;updateTotals();};
   renderGames(); updateTotals();
 }
 
 function renderGames() {
-  document.getElementById("gamesContainer").innerHTML = currentDay.games.map((game,gi)=>`
+  document.getElementById("gamesContainer").innerHTML=currentDay.games.map((game,gi)=>`
     <div class="game-card">
       <div class="game-header">
         <div class="wall-toggle-row">
@@ -296,19 +312,15 @@ function renderGames() {
     </div>`).join("");
 }
 
-function toggleWall(gi) { currentDay.games[gi].isWallGame=!currentDay.games[gi].isWallGame; renderGames(); updateTotals(); }
-function updateField(gi,p,field,val) { currentDay.games[gi][p][field]=val; updateTotals(); }
-function addGame() { currentDay.games.push(newGame()); renderGames(); updateTotals(); }
-function removeGame(gi) { currentDay.games.splice(gi,1); renderGames(); updateTotals(); }
+function toggleWall(gi){currentDay.games[gi].isWallGame=!currentDay.games[gi].isWallGame;renderGames();updateTotals();}
+function updateField(gi,p,field,val){currentDay.games[gi][p][field]=val;updateTotals();}
+function addGame(){currentDay.games.push(newGame());renderGames();updateTotals();}
+function removeGame(gi){currentDay.games.splice(gi,1);renderGames();updateTotals();}
 
-function getDayTotals() {
-  const t={}; PLAYERS.forEach(p=>t[p]=0);
-  currentDay.games.forEach(g=>PLAYERS.forEach(p=>{t[p]+=parseInt(g[p]?.points)||0;}));
-  return t;
-}
-function updateTotals() {
+function getDayTotals(){const t={};PLAYERS.forEach(p=>t[p]=0);currentDay.games.forEach(g=>PLAYERS.forEach(p=>{t[p]+=parseInt(g[p]?.points)||0;}));return t;}
+function updateTotals(){
   const t=getDayTotals();
-  document.getElementById("totalsTitle").textContent=`📊 DAY TOTALS — ${currentDay.date}`;
+  document.getElementById("totalsTitle").textContent=`📊 DAY TOTALS — ${currentDay.date} · Season ${currentSeason}`;
   document.getElementById("totalsGrid").innerHTML=PLAYERS.map(p=>`
     <div class="total-item" style="background:${PASTEL[p].bg}">
       <span style="color:${PASTEL[p].text};font-weight:bold;font-size:13px">${p}</span>
@@ -316,34 +328,35 @@ function updateTotals() {
     </div>`).join("");
 }
 
-async function saveDay() {
-  const btn=document.getElementById("saveBtn"), msg=document.getElementById("saveMsg");
-  btn.disabled=true; btn.textContent="Saving…"; btn.style.background="#dda0b8";
-  const snapshot = JSON.parse(JSON.stringify(currentDay));
-  state.days.push(snapshot);
-  try {
+async function saveDay(){
+  const btn=document.getElementById("saveBtn"),msg=document.getElementById("saveMsg");
+  btn.disabled=true;btn.textContent="Saving…";btn.style.background="#dda0b8";
+  if(!state[currentSeason])state[currentSeason]={days:[]};
+  state[currentSeason].days.push(JSON.parse(JSON.stringify(currentDay)));
+  try{
     await apiSave(state);
-    msg.textContent="☁️ Saved! ✓"; msg.style.color="#307050";
-    currentDay=newDay(); renderToday(); renderLanding();
-  } catch {
-    state.days.pop();
-    msg.textContent="⚠️ Save failed — try again"; msg.style.color="#c04040";
+    msg.textContent=`☁️ Saved to Season ${currentSeason}! ✓`;msg.style.color="#307050";
+    currentDay=newDay();renderToday();renderLanding();
+  }catch{
+    state[currentSeason].days.pop();
+    msg.textContent="⚠️ Save failed — try again";msg.style.color="#c04040";
   }
-  btn.disabled=false; btn.style.background="linear-gradient(135deg,#f0a0c0,#d070a0)"; btn.textContent="💾 Save Day to Season";
+  btn.disabled=false;btn.style.background="linear-gradient(135deg,#f0a0c0,#d070a0)";btn.textContent="💾 Save Day to Season";
   setTimeout(()=>msg.textContent="",3000);
 }
 
 // ── Season ─────────────────────────────────────────────────────────────────
-function renderSeason() {
-  const season=computeSeason();
-  const total=(state.days||[]).reduce((s,d)=>s+(d.games?.length||0),0);
-  document.getElementById("seasonSub").textContent=`${state.days.length} game days · ${total} games total`;
+function renderSeason(){
+  const season=computeSeason(), days=seasonData().days||[];
+  const total=days.reduce((s,d)=>s+(d.games?.length||0),0);
+  document.getElementById("seasonSub").textContent=`${days.length} game days · ${total} games total`;
+  document.getElementById("seasonBadge").textContent=currentSeason;
 
   const sorted=[...PLAYERS].sort((a,b)=>(season[b].points||0)-(season[a].points||0));
   const maxPts=Math.max(...PLAYERS.map(p=>season[p].points||0),1);
   const medals=["🥇","🥈","🥉"];
   document.getElementById("leaderboardRows").innerHTML=sorted.map((p,rank)=>{
-    const pts=season[p].points||0, pct=Math.max((pts/maxPts)*100,0);
+    const pts=season[p].points||0,pct=Math.max((pts/maxPts)*100,0);
     return `<div class="lb-row">
       <span class="lb-rank">${rank<3?medals[rank]:`<span style="color:#c0a0b0;font-size:13px">${rank+1}.</span>`}</span>
       <span class="lb-name" style="color:${PASTEL[p].text}">${EMOJI[p]} ${p}</span>
@@ -368,17 +381,17 @@ function renderSeason() {
   }).join("");
 
   const hsec=document.getElementById("historySection");
-  if (!state.days.length){hsec.innerHTML="";return;}
-  hsec.innerHTML=`<div class="section-label" style="margin-bottom:12px">Game Day History</div>`+
-    [...state.days].reverse().map((day,di)=>{
+  if(!days.length){hsec.innerHTML="";return;}
+  hsec.innerHTML=`<div class="section-label" style="margin-bottom:12px">Game Day History — Season ${currentSeason}</div>`+
+    [...days].reverse().map((day,di)=>{
       const wallCount=day.games?.filter(g=>g.isWallGame).length||0;
       const gameCount=day.games?.length||0;
       const wallFlag=wallCount>0?` · 🧱 ${wallCount} wall${wallCount!==1?"s":""}` :"";
       const uid=`day-${di}`;
       return `<div class="history-card">
-        <div class="history-header" onclick="toggleDay('${uid}')" style="cursor:pointer">
+        <div class="history-header" onclick="toggleDay('${uid}')">
           <span class="history-date">📅 ${day.date}</span>
-          <span class="history-sub">${gameCount} game${gameCount!==1?"s":""}${wallFlag} <span id="arrow-${uid}" style="margin-left:6px">▼</span></span>
+          <span class="history-sub">${gameCount} game${gameCount!==1?"s":""}${wallFlag} <span id="arrow-${uid}">▼</span></span>
         </div>
         <div class="history-grid">
           ${PLAYERS.map(p=>{
@@ -394,8 +407,7 @@ function renderSeason() {
               </div>
               <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
                 ${PLAYERS.map(p=>{
-                  const pts=parseInt(game[p]?.points)||0;
-                  const hand=game[p]?.hand?.trim();
+                  const pts=parseInt(game[p]?.points)||0, hand=game[p]?.hand?.trim();
                   return `<div style="background:${PASTEL[p].bg};border-radius:8px;padding:6px 10px">
                     <div style="font-weight:bold;font-size:12px;color:${PASTEL[p].text}">${EMOJI[p]} ${p}</div>
                     <div style="font-size:14px;font-weight:bold;color:${pts>0?PASTEL[p].accent:'#c0a0b0'}">${pts>0?'+':''}${pts}</div>
@@ -409,25 +421,36 @@ function renderSeason() {
     }).join("");
 }
 
-function toggleDay(uid) {
-  const el=document.getElementById(uid);
-  const arrow=document.getElementById('arrow-'+uid);
-  if (!el) return;
-  const open=el.style.display==='none';
-  el.style.display=open?'block':'none';
-  arrow.textContent=open?'▲':'▼';
+function toggleDay(uid){
+  const el=document.getElementById(uid),arrow=document.getElementById('arrow-'+uid);
+  if(!el)return; const open=el.style.display==='none';
+  el.style.display=open?'block':'none'; arrow.textContent=open?'▲':'▼';
 }
 
-async function clearSeason() {
-  if (!confirm("Clear ALL season data? This cannot be undone.")) return;
-  state={days:[]};
-  await apiSave(state);
-  renderSeason(); renderLanding();
+async function clearSeason(){
+  if(!confirm(`Clear ALL data for Season ${currentSeason}? This cannot be undone.`))return;
+  state[currentSeason]={days:[]};
+  await apiSave(state); renderSeason(); renderLanding();
 }
 
 // ── Init ───────────────────────────────────────────────────────────────────
+selectSeason("2026");
 renderLanding();
-apiLoad().then(data => { state=data; renderLanding(); }).catch(()=>{});
+apiLoad().then(data=>{
+  if(!data) return;
+  if(data["2025"]!==undefined || data["2026"]!==undefined){
+    // Already in new multi-season format
+    state = data;
+    if(!state["2025"]) state["2025"]={days:[]};
+    if(!state["2026"]) state["2026"]={days:[]};
+  } else if(data.days) {
+    // Old format — migrate existing days to 2026
+    state = {"2025":{days:[]},"2026":{days:data.days}};
+    // Save migrated format back to server
+    apiSave(state).catch(()=>{});
+  }
+  renderLanding();
+}).catch(()=>{});
 </script>
 </body>
 </html>
