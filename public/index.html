@@ -122,14 +122,11 @@
     <div class="emoji-row" id="avatarRow"></div>
     <div style="margin-bottom:8px;color:#b080a0;font-size:11px;letter-spacing:2px;text-transform:uppercase">Select Season</div>
     <div class="season-switcher">
-      <button class="season-btn" id="btn-2025" onclick="selectSeason('2025')">🀄 Season 2025</button>
-      <button class="season-btn" id="btn-2026" onclick="selectSeason('2026')">🀄 Season 2026</button>
+      <button class="season-btn" id="btn-2025" onclick="selectSeason('2025');goTo('season')">🏆 Season 2025</button>
+      <button class="season-btn" id="btn-2026" onclick="selectSeason('2026');goTo('season')">🏆 Season 2026</button>
     </div>
     <div class="stat-box" id="statBox">Loading…</div>
-    <div style="display:flex;flex-direction:column">
-      <button class="btn-primary" onclick="goTo('today')">🎴 Score Today's Games</button>
-      <button class="btn-secondary" onclick="goTo('season')">🏆 Season Totals</button>
-    </div>
+    <button class="btn-primary" onclick="goTo('today')">🎴 Score Today's Games</button>
   </div>
 </div>
 
